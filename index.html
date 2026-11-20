@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal EXANI-II Simplificado — Asesorías Académicas Izamal</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--azul:#0033cc;--azul-dark:#002299;--azul-light:#e8eeff;--naranja:#ff4500;--bg:#f0f4ff;--card:#fff;--txt:#1a1a2e;--sub:#5a6080}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
+.hero{background:linear-gradient(135deg,var(--azul),var(--azul-dark));color:#fff;padding:22px 16px 0}
+.hero-inner{max-width:900px;margin:0 auto;display:flex;gap:16px;align-items:center;padding-bottom:18px}
+.hero-logo{width:78px;height:78px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.hero-logo img{width:100%;height:100%;object-fit:cover}
+.hero-title{font-size:1.35rem;font-weight:800;line-height:1.2}
+.hero-title span{color:#ffd080}
+.hero-subtitle{font-size:.82rem;opacity:.9;line-height:1.5;margin-top:4px}
+.hero-badge{display:inline-block;margin-top:8px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);padding:4px 10px;border-radius:20px;font-size:.72rem;font-weight:700}
+.hero-stripe{height:6px;background:linear-gradient(90deg,#ff4500,#ffb300,#ff4500)}
+.wrap{max-width:900px;margin:0 auto;padding:18px 14px 40px}
+.card{background:var(--card);border-radius:14px;padding:20px;box-shadow:0 6px 24px rgba(0,51,204,.13);margin-bottom:16px}
+.card-title{font-size:1rem;font-weight:800;color:var(--azul);margin-bottom:14px}
+.examen-info{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.info-box{background:var(--azul-light);border-radius:10px;padding:12px 8px;text-align:center}
+.info-box .val{font-size:1.25rem;font-weight:800;color:var(--azul)}
+.info-box .lbl{font-size:.7rem;color:var(--sub);margin-top:2px}
+.examen-nota{font-size:.85rem;line-height:1.7;color:var(--txt);background:#fff8f0;border-left:4px solid var(--naranja);padding:12px 14px;border-radius:0 10px 10px 0}
+.examen-nota code{background:#e8eeff;padding:2px 6px;border-radius:4px;font-size:.78rem}
+.badge-cnt{background:var(--azul);color:#fff;border-radius:20px;padding:2px 9px;font-size:.7rem;margin-left:6px}
+.modulo-oblig{display:flex;gap:12px;align-items:flex-start;border:2px solid #d8e4f8;border-radius:12px;padding:14px;margin-bottom:10px}
+.mod-icon{font-size:1.6rem}
+.mod-body{flex:1}
+.mod-nombre{font-weight:800;font-size:.92rem}
+.mod-desc{font-size:.8rem;color:var(--sub);line-height:1.5;margin-top:3px}
+.mod-status{text-align:right}
+.status-badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:.7rem;font-weight:800}
+.status-badge.pendiente{background:#fff3cd;color:#856404}
+.status-badge.completado{background:#d4edda;color:#155724}
+.status-score{display:block;font-size:.75rem;font-weight:800;color:var(--azul);margin-top:5px}
+.progreso-head{display:flex;justify-content:space-between;font-size:.8rem;font-weight:700;margin-bottom:8px}
+.progreso-track{height:12px;background:#e8eeff;border-radius:20px;overflow:hidden}
+.progreso-bar{height:100%;background:linear-gradient(90deg,var(--azul),#00aaff);transition:width .4s}
+.progreso-completados{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
+.comp-chip{background:#e8eeff;color:var(--azul);padding:5px 10px;border-radius:20px;font-size:.72rem;font-weight:700}
+.cne-resumen{background:linear-gradient(135deg,var(--azul),var(--azul-dark));border-radius:14px;padding:20px;text-align:center;color:#fff}
+.cne-titulo{font-size:.75rem;font-weight:700;color:rgba(255,255,255,.7);letter-spacing:.5px}
+.cne-valor{font-size:2.2rem;font-weight:800;color:#ffd080}
+.cne-max{font-size:1rem;opacity:.7}
+.cne-etiqueta{font-weight:700;margin:6px 0 10px}
+.cne-track{height:10px;background:rgba(255,255,255,.25);border-radius:20px;overflow:hidden}
+.cne-fill{height:100%;background:#ffd080}
+.cne-escala{display:flex;justify-content:space-between;font-size:.65rem;opacity:.8;margin-top:5px}
+.btn-iniciar{width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--azul),var(--azul-dark));color:#fff;font-size:1rem;font-weight:800;cursor:pointer}
+.btn-iniciar:hover{opacity:.92}
+.btn-sec{width:100%;padding:12px;border-radius:12px;background:#fff;color:var(--azul);border:2px solid var(--azul);font-size:.9rem;font-weight:800;cursor:pointer;margin-top:10px}
+@media(max-width:600px){.examen-info{grid-template-columns:1fr 1fr}.hero-title{font-size:1.05rem}.modulo-oblig{flex-direction:column}.mod-status{text-align:left}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-logo"><img src="logo.png" alt="Logo Asesorías Académicas Izamal"></div>
+    <div class="hero-text">
+      <div class="hero-title">Asesorías Académicas <span>Izamal</span></div>
+      <div class="hero-subtitle">Simulacro Integral EXANI-II<br>Versión Simplificada — Solo Módulos Específicos</div>
+      <span class="hero-badge">🎓 Portal de Simulacros</span>
+    </div>
+  </div>
+  <div class="hero-stripe"></div>
+</div>
+
+<div class="wrap">
+<div id="screen-inicio">
+
+  <div class="card">
+    <div class="card-title">📋 ¿Qué es esta versión?</div>
+    <div class="examen-info">
+      <div class="info-box"><div class="val">3</div><div class="lbl">Módulos específicos</div></div>
+      <div class="info-box"><div class="val">0</div><div class="lbl">Módulos optativos</div></div>
+      <div class="info-box"><div class="val">700–1300</div><div class="lbl">Escala CENEVAL</div></div>
+      <div class="info-box"><div class="val">DINÁMICO</div><div class="lbl">Cálculo por reactivos</div></div>
+    </div>
+    <div class="examen-nota">
+      Esta versión <strong>NO incluye módulos optativos</strong>. Solo los <strong>3 módulos específicos</strong> en este orden:<br>
+      <strong>1. Pensamiento Matemático → 2. Redacción Indirecta → 3. Comprensión Lectora → Resultados.</strong><br><br>
+      Durante cada módulo <strong>NO verás explicaciones ni si tu respuesta es correcta</strong>. Podrás cambiar tu respuesta mientras estés en el módulo. Al final, en la página de Resultados verás el resumen por módulo y tu <strong>Índice CENEVAL estimado, calculado dinámicamente</strong> con el total real de reactivos de los 3 módulos:<br>
+      <code>ICNE = 1000 + 100 × ((% − 50) / 16.67)</code>, limitado a 700–1300.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📌 Módulos Específicos <span class="badge-cnt">3</span></div>
+
+    <div class="modulo-oblig" id="bloque-pm">
+      <div class="mod-icon">🔢</div>
+      <div class="mod-body"><div class="mod-nombre">1. Pensamiento Matemático</div><div class="mod-desc">Razonamiento numérico, algebraico y geométrico.</div></div>
+      <div class="mod-status"><span class="status-badge pendiente" id="status-pm">Pendiente</span><span class="status-score" id="score-pm" style="display:none"></span></div>
+    </div>
+
+    <div class="modulo-oblig" id="bloque-ri">
+      <div class="mod-icon">✍️</div>
+      <div class="mod-body"><div class="mod-nombre">2. Redacción Indirecta</div><div class="mod-desc">Ortografía, gramática y cohesión de textos.</div></div>
+      <div class="mod-status"><span class="status-badge pendiente" id="status-ri">Pendiente</span><span class="status-score" id="score-ri" style="display:none"></span></div>
+    </div>
+
+    <div class="modulo-oblig" id="bloque-cl">
+      <div class="mod-icon">📖</div>
+      <div class="mod-body"><div class="mod-nombre">3. Comprensión Lectora</div><div class="mod-desc">Análisis y comprensión de textos.</div></div>
+      <div class="mod-status"><span class="status-badge pendiente" id="status-cl">Pendiente</span><span class="status-score" id="score-cl" style="display:none"></span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📊 Tu progreso</div>
+    <div class="progreso">
+      <div class="progreso-head"><span id="prog-texto">0 de 3 módulos completados</span><span id="prog-pct">0%</span></div>
+      <div class="progreso-track"><div class="progreso-bar" id="prog-bar" style="width:0%"></div></div>
+    </div>
+    <div class="progreso-completados" id="prog-chips"></div>
+
+    <div id="cne-general" style="display:none;margin-top:18px;">
+      <div class="cne-resumen">
+        <div class="cne-titulo">📊 Índice CENEVAL Estimado General</div>
+        <div><span class="cne-valor" id="cne-g-val">—</span><span class="cne-max"> / 1300</span></div>
+        <div class="cne-etiqueta" id="cne-g-lbl"></div>
+        <div class="cne-track"><div class="cne-fill" id="cne-g-bar" style="width:0%"></div></div>
+        <div class="cne-escala"><span>700</span><span>850</span><span>1000</span><span>1150</span><span>1300</span></div>
+      </div>
+      <p style="font-size:.75rem;color:var(--sub);line-height:1.6;" id="cne-g-nota"></p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🚀 Comenzar simulacro</div>
+    <p style="font-size:.85rem;color:var(--sub);margin-bottom:12px">Empezarás en <strong>Pensamiento Matemático</strong>. Al terminar cada módulo pasarás automáticamente al siguiente.</p>
+    <button class="btn-iniciar" onclick="iniciarSimulacro()">▶ Iniciar Simulacro — Pensamiento Matemático</button>
+    <button class="btn-sec" onclick="if(confirm('¿Borrar resultados y empezar de cero?')){localStorage.removeItem('exani_pm');localStorage.removeItem('exani_ri');localStorage.removeItem('exani_cl');localStorage.removeItem('simulacro_Pensamiento_Matemático');localStorage.removeItem('simulacro_Redacción_Indirecta');localStorage.removeItem('simulacro_Comprensión_Lectora');location.reload();}">🔄 Borrar y empezar de cero</button>
+  </div>
+
+</div>
+</div>
+
+<script>
+// Solo 3 módulos, sin optativos. Rutas RELATIVAS para GitHub Pages.
+const MODULOS_INFO = {
+  pm:{nombre:'Pensamiento Matemático',archivo:'pm.html',icon:'🔢'},
+  ri:{nombre:'Redacción Indirecta',archivo:'ri.html',icon:'✍️'},
+  cl:{nombre:'Comprensión Lectora',archivo:'cl.html',icon:'📖'}
+};
+const ORDEN = ['pm','ri','cl'];
+
+function calcCNE(pct){
+  const z = (pct - 50) / 16.67;
+  return Math.min(1300, Math.max(700, Math.round(1000 + 100 * z)));
+}
+function cneLabel(c){
+  return c>=1100?'Muy por encima de la media':c>=1050?'Por encima de la media':c>=950?'Cerca de la media':c>=900?'Por debajo de la media':'Muy por debajo de la media';
+}
+function leerPuntajes(){
+  const out = {};
+  const claves = {
+    pm:['exani_pm','simulacro_Pensamiento_Matemático'],
+    ri:['exani_ri','simulacro_Redacción_Indirecta'],
+    cl:['exani_cl','simulacro_Comprensión_Lectora']
+  };
+  for(const k in claves){
+    for(const ck of claves[k]){
+      try{
+        const d = JSON.parse(localStorage.getItem(ck) || 'null');
+        if(d){ out[k] = {correctas: d.correctas ?? d.correctos, total: d.total, pct: d.pct}; break; }
+      }catch(e){}
+    }
+  }
+  return out;
+}
+function actualizarUI(){
+  const scores = leerPuntajes();
+  const completados = ORDEN.filter(m => scores[m]);
+  ORDEN.forEach(mod => {
+    const sb = document.getElementById('status-' + mod);
+    const ss = document.getElementById('score-' + mod);
+    if(!sb) return;
+    if(scores[mod]){
+      sb.textContent = 'Completado';
+      sb.className = 'status-badge completado';
+      ss.textContent = scores[mod].pct + '% (' + scores[mod].correctas + '/' + scores[mod].total + ')';
+      ss.style.display = 'block';
+      const b = document.getElementById('bloque-' + mod);
+      if(b) b.style.borderColor = '#27ae60';
+    }
+  });
+  const pct = Math.round(completados.length / 3 * 100);
+  document.getElementById('prog-texto').textContent = completados.length + ' de 3 módulos completados';
+  document.getElementById('prog-pct').textContent = pct + '%';
+  document.getElementById('prog-bar').style.width = pct + '%';
+  document.getElementById('prog-chips').innerHTML = completados.map(m => `<span class="comp-chip">${MODULOS_INFO[m].icon} ${MODULOS_INFO[m].nombre}</span>`).join('');
+
+  // CENEVAL DINÁMICO: se lee el total real de reactivos de los 3 módulos
+  if(completados.length === 3){
+    const totalReact = completados.reduce((s,m) => s + (scores[m].total || 0), 0);
+    const totalOk = completados.reduce((s,m) => s + (scores[m].correctas || 0), 0);
+    const pctGen = totalReact ? Math.round(totalOk / totalReact * 100) : 0;
+    const cne = calcCNE(pctGen);
+    document.getElementById('cne-general').style.display = 'block';
+    document.getElementById('cne-g-val').textContent = cne;
+    document.getElementById('cne-g-val').style.color = '#ffd080';
+    document.getElementById('cne-g-lbl').textContent = cneLabel(cne);
+    document.getElementById('cne-g-bar').style.width = ((cne - 700) / 600 * 100) + '%';
+    document.getElementById('cne-g-bar').style.background = '#ffd080';
+    document.getElementById('cne-g-nota').textContent = 'CÁLCULO DINÁMICO: ' + totalOk + ' aciertos de ' + totalReact + ' reactivos totales entre los 3 módulos (' + pctGen + '%). Fórmula CENEVAL: Z=(%−50)/16.67, ICNE=1000+100Z. Escala 700–1300.';
+  }
+}
+function iniciarSimulacro(){
+  try{ localStorage.setItem('portalUrl', window.location.href); }catch(e){}
+  window.location.href = MODULOS_INFO.pm.archivo; // pm.html
+}
+actualizarUI();
+</script>
+</body>
+</html>
+
